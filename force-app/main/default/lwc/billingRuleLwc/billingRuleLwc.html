@@ -1,0 +1,536 @@
+<template>
+    <article class="slds-card">
+        <div class="slds-card__header slds-grid">
+        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+        <div class="slds-media__figure">
+        <span class="slds-icon_container slds-icon-custom-custom9" title="Billing Rules">
+        <svg class="slds-icon slds-icon_small" aria-hidden="true">
+        <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+        </svg>
+        <span class="slds-assistive-text">Billing Rules</span>
+        </span>
+        </div>
+        <div class="slds-media__body">
+        <h2 class="slds-card__header-title">
+        <a href="#" class="slds-card__header-link slds-truncate" title="Billing Rules">
+        <span>Billing Rules({ruleCount})</span>
+        </a>
+        </h2>
+        </div>
+        <div class="slds-no-flex">
+        <button class="slds-button slds-button_neutral" onclick={handleNewButton}>New</button>
+        </div>
+        </header>
+        </div>
+        </article>
+        
+            <div id="containerDiv" onmousemove={handlemousemove} onmouseup={handlemouseup}
+            ondblclick={handledblclickresizable}
+            class="slds-table_header-fixed_container slds-border_right slds-border_left tableScroll"
+            onscroll={tableOuterDivScrolled}>
+           <div id="tableViewInnerDiv" onscroll={tableScrolled} class="slds-scrollable_y tableViewInnerDiv">
+    
+               <table class="slds-table slds-table_bordered slds-table_header-fixed slds-table_resizable-cols slds-table_fixed-layout">
+                   <thead>
+                       <tr>
+                           <th class="slds-is-resizable dv-dynamic-width" scope="col" style={fixedWidth} title="Rule Type">
+                               <div class="slds-cell-fixed" style={fixedWidth}>
+                                   <a class="slds-th__action slds-text-link--reset ">
+                                       <span class="slds-truncate">Rule Type</span>
+                                   </a>
+                                   <div class="slds-resizable">
+                                       <span class="slds-resizable__handle" onmousedown={handlemousedown}>
+                                           <span class="slds-resizable__divider"></span>
+                                       </span>
+                                   </div>
+                               </div>
+                           </th>
+                           <th class="slds-is-resizable dv-dynamic-width" scope="col" style={fixedWidth} title="Field Label">
+                               <div class="slds-cell-fixed" style={fixedWidth}>
+                                   <a class="slds-th__action slds-text-link--reset ">
+                                       <span class="slds-truncate">Field Label</span>
+                                   </a>
+                                   <div class="slds-resizable">
+                                       <span class="slds-resizable__handle" onmousedown={handlemousedown}>
+                                           <span class="slds-resizable__divider"></span>
+                                       </span>
+                                   </div>
+                               </div>
+                           </th>
+                           <th class="slds-is-resizable dv-dynamic-width" scope="col" style={fixedWidth} title="Operator">
+                               <div class="slds-cell-fixed" style={fixedWidth}>
+                                   <a class="slds-th__action slds-text-link--reset ">
+                                       <span class="slds-truncate">Operator</span>
+                                   </a>
+                                   <div class="slds-resizable">
+                                       <span class="slds-resizable__handle" onmousedown={handlemousedown}>
+                                           <span class="slds-resizable__divider"></span>
+                                       </span>
+                                   </div>
+                               </div>
+                           </th>
+                            <th class="slds-is-resizable dv-dynamic-width" scope="col" style={fixedWidth} title="Value">
+                               <div class="slds-cell-fixed" style={fixedWidth}>
+                                   <a class="slds-th__action slds-text-link--reset ">
+                                       <span class="slds-truncate">Value</span>
+                                   </a>
+                                   <div class="slds-resizable">
+                                       <span class="slds-resizable__handle" onmousedown={handlemousedown}>
+                                           <span class="slds-resizable__divider"></span>
+                                       </span>
+                                   </div>
+                               </div>
+                           </th>
+                           <th class="slds-is-resizable dv-dynamic-width" scope="col" style={fixedWidth} title="Variable">
+                               <div class="slds-cell-fixed" style={fixedWidth}>
+                                   <a class="slds-th__action slds-text-link--reset ">
+                                       <span class="slds-truncate">Variable</span>
+                                   </a>
+                                   <div class="slds-resizable">
+                                       <span class="slds-resizable__handle" onmousedown={handlemousedown}>
+                                           <span class="slds-resizable__divider"></span>
+                                       </span>
+                                   </div>
+                               </div>
+                           </th>
+                          <th class="slds-is-resizable dv-dynamic-width" scope="col" style={fixedWidth} title="Action">
+                               <div class="slds-cell-fixed" style={fixedWidth}>
+                                   <a class="slds-th__action slds-text-link--reset ">
+                                       <span class="slds-truncate">Action</span>
+                                   </a>
+                                   <div class="slds-resizable">
+                                       <span class="slds-resizable__handle" onmousedown={handlemousedown}>
+                                           <span class="slds-resizable__divider"></span>
+                                       </span>
+                                   </div>
+                               </div>
+                           </th> 
+                       </tr>
+                   </thead>
+                   <tbody>
+                    <template for:each={billRuledata} for:item="bill" for:index="indx">
+                           <tr key={bill.Id} id={bill.Id}> 
+                           <td>
+                               <div data-id={indx} class="slds-truncate dv-dynamic-width" style={fixedWidth}>{bill.RuleType__c}</div>
+                           </td>
+                           <td>
+                               <div data-id={indx} class="slds-truncate dv-dynamic-width" style={fixedWidth}>{bill.Field_Label__c}</div>
+                           </td>
+                           <td>
+                               <div data-id={indx} class="slds-truncate dv-dynamic-width" style={fixedWidth}>{bill.Operator__c}</div>
+                           </td>
+                           <td>
+                               <div data-id={indx} class="slds-truncate dv-dynamic-width" style={fixedWidth}>{bill.Value__c}</div>
+                           </td>
+                           <td>
+                               <div data-id={indx} class="slds-truncate dv-dynamic-width" style={fixedWidth}>{bill.Variable__c}</div>
+                           </td>
+                           <td>
+                                <lightning-button-menu data-id={indx} class="slds-dropdown_x-small" onselect={handleOnMenuSelect} variant="border">
+                                    <lightning-menu-item value="editRecord" label="Edit"></lightning-menu-item>
+                                    <lightning-menu-item value="deleteRecord" label="Delete"></lightning-menu-item>
+                                </lightning-button-menu>
+                           </td>
+                       </tr> 
+                    </template>
+                   </tbody>
+               </table>
+           </div>
+       </div>
+
+<!-- modal Edit Rule start -->      
+   <template if:true={isEditRuleShowModal}>
+
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+       <div class="slds-modal__container" style="width: 60% !important;  height : auto;">
+        <!-- modal header start -->
+          <header class="slds-modal__header">
+             <h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate">Edit Billing Rule</h2>
+          </header>
+      
+          <!-- modal body start -->
+          <div class="slds-modal__content slds-p-around_medium" style="height : 20vh !important;" id="modal-content-id-2">
+
+            <div class="slds-p-around_none slds-m-top_x-small slds-m-bottom_medium slds-m-horizontal_none">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item padding="around-small" size="12" small-device-size="6" medium-device-size="4" large-device-size="3">
+                        <div class="custom-box slds-p-around_medium slds-m-top_medium slds-text-align_center">{rowToEdit.Field_Label__c}</div>
+                    </lightning-layout-item>
+                    <lightning-layout-item padding="around-small" size="12" small-device-size="6" medium-device-size="4" large-device-size="3">
+                        <div class="custom-box slds-p-around_medium slds-text-align_center">
+                            <lightning-combobox class="mandatoryEditfield"
+                            label="Operator"
+                            required=" true"
+                            value={rowToEdit.Value__c}
+                            placeholder="--None--"
+                            options={operatorEditOptions}
+                            onchange={handleEditRuleOperatorChange} >
+                           </lightning-combobox>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item padding="around-small" size="12" small-device-size="6" medium-device-size="4" large-device-size="3">
+                        <div class="custom-box slds-p-around_medium slds-text-align_center" size="12" small-device-size="6" medium-device-size="4" large-device-size="3">
+                            <template lwc:if={rowToEdit.isOtherType}>
+                                <td>
+                                 <lightning-input class="mandatoryEditfield slds-m-left_small" data-edit='editInput' disabled = {rowToEdit.Variable__c} type={otherfieldDataType} label="Value" value={rowToEdit.Value__c} required=" true" onblur={handleEditInputChange}></lightning-input>
+                                </td>
+                                </template>
+        
+                                <template lwc:elseif={rowToEdit.isDateType}>
+                                    <td>
+                                     <lightning-input class="mandatoryEditfield slds-m-left_small" data-edit='editInput' disabled = {rowToEdit.Variable__c} type="Date" label="Value" value={rowToEdit.Value__c} required="true" onblur={handleEditInputChange}></lightning-input>
+                                    </td>
+                                </template>
+        
+                                <template lwc:elseif={rowToEdit.isDateTimeType}>
+                                    <td>
+                                     <lightning-input class="mandatoryEditfield slds-m-left_small" data-edit='editInput' disabled = {rowToEdit.Variable__c} type="DateTime" value={rowToEdit.Value__c} required="true" onblur={handleEditInputChange}></lightning-input>
+                                    </td>
+                                </template>
+        
+                                <template lwc:elseif={rowToEdit.isPickListType}>
+                                    <td>
+                               <lightning-combobox
+                                data-edit='editInput'
+                                class="mandatoryEditfield slds-m-left_small"
+                                required="true"
+                                disabled={rowToEdit.Variable__c}
+                                value={rowToEdit.Value__c}
+                                placeholder="--None--"
+                                options={editPickValueOptions}
+                                onchange={handleEditInputChange} >
+                                </lightning-combobox>
+                                       </td>
+                                </template>
+                                <template lwc:elseif={rowToEdit.isBooleanType}>
+                                    <td>
+                                        <select data-edit='editInput' class="slds-select slds-m-top_medium mandatoryEditfield slds-m-left_small slds-show_inline-block"  disabled={rowToEdit.Variable__c} name = "optionSelect" onchange={handleEditInputChange} >
+                                            <option value="true">True</option>
+                                            <option value="false">False</option>
+                                        </select> 
+                                    </td>
+                                    </template>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item padding="around-small" size="12" small-device-size="6" medium-device-size="4" large-device-size="3">
+                        <div class="custom-box slds-p-around_medium slds-text-align_center">
+                            <lightning-input class="slds-m-top_large slds-m-left_large" type="checkbox" data-edit="checkbox" checked={rowToEdit.Variable__c} label="Variable" onchange={handleEditRuleInputVariable}></lightning-input>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+          </div>
+
+          <!-- modal footer start-->
+          <footer class="slds-modal__footer">
+             <button class="slds-button slds-button_neutral" onclick={CloseEditModalBox}>Cancel</button>
+			 <button class="slds-button slds-button_neutral" onclick={handleEditValidation}>Save</button>
+          </footer>
+       
+       </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+ </template>
+ 
+ <!-- modalEdit Rule end -->
+        <template if:true={isModalOpen}>
+            <!-- Modal/Popup Box LWC starts here -->
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- Modal/Popup Box LWC header here -->
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                            <lightning-icon icon-name="utility:close"
+                                alternative-text="close"
+                                variant="inverse"
+                                size="small" ></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">New Billing Rules</h2>
+                    </header>
+                   
+                    <!-- Modal/Popup Box LWC body starts here -->
+                    <div class="slds-modal__content slds-p-around_medium modalBody" id="modal-content-id-1">
+                        <p class="slds-theme_shade"> 1. SELECT THE TYPE OF THE NEW BILLING RULES</p>
+                        <lightning-combobox
+                        label="Billing Rule Type"
+                        value={value}
+                        placeholder="--None--"
+                        options={options}
+                        onchange={handleRuleChange} >
+            </lightning-combobox>
+            <br/>
+    
+            <template lwc:if={openOpportunityRule}> 
+                <p class="slds-theme_shade slds-text-body_small"> 2. SELECT THE BILLING RULE FIELD</p>
+
+                <div class="slds-p-around_none slds-m-top_x-small slds-m-bottom_medium slds-m-horizontal_none">
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item padding="around-small" size="12" small-device-size="6" medium-device-size="4" large-device-size="3">
+                            <div class="custom-box">
+                                <div class="slds-scrollable box-shadow: 0px 2px 5px silver;" style="height:8rem" tabindex="0">
+                                    <div class="slds-text-longform" style="width:8%"></div>
+                                        <template for:each={duallistoptions} for:item="col">
+                                       <p key={col.value}> <button class="textButton" onclick={handleTextSelect} value={col.value}>{col.label}</button> </p>
+                                        </template>
+                                    </div>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="12" small-device-size="6" medium-device-size="4" large-device-size="3">
+                            <div class="custom-box">
+                                <template if:true={showSpinner} >
+                                    <div class="exampleHolder">
+                                    <lightning-spinner alternative-text="Loading" variant="brand" size="medium"></lightning-spinner>
+                                    </div>
+                                </template>
+            
+                                <template if:true={isLookup}>
+                                    <div class="slds-scrollable box-shadow: 0px 2px 5px silver;" style="height:8rem" tabindex="0">
+                                        <div class="slds-text-longform" style="width:8%"></div>
+                                            <template for:each={lookupOptions} for:item="col">
+                                           <p key={col.value}> <button class="textButton" onclick={handleTextSelect2} value={col.value}>{col.label}</button> </p>
+                                            </template>
+                                        </div>
+                                 </template>
+            
+                                 <template if:true={isNotLookup}>
+                                      <div class="slds-text-align_center  slds-m-bottom_small">{selectedObject}.{selectedField}</div>
+                                      <div class="slds-text-align_center  slds-m-bottom_small">              {selectedField}</div>
+                                     <div class="slds-text-align_center slds-m-bottom_small">              {selectedField}</div>
+                                    
+                                <div class="button-container slds-align_absolute-center slds-m-top_small">
+                                    <button class="slds-button slds-button_neutral" onclick={handleCancelField1} title="Cancel">Cancel</button>
+                                    <button class="slds-button slds-button_brand" onclick={handleAddField} title="Add">Add</button>
+                                </div>
+                                 </template>
+
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="12" small-device-size="6" medium-device-size="4" large-device-size="3">
+                            <div class="custom-box" size="12" small-device-size="6" medium-device-size="4" large-device-size="3">
+                                <template if:true={is2ndLookup}>
+                                    <div class="slds-scrollable box-shadow: 0px 2px 5px silver;" style="height:8rem" tabindex="0">
+                                        <div class="slds-text-longform" style="width:8%"></div>
+                                            <template for:each={lookup2ndOptions} for:item="col">
+                                           <p key={col.value}> <button class="textButton" onclick={handleTextSelect3} value={col.value}>{col.label}</button> </p>
+                                            </template>
+                                        </div>
+                                 </template>
+                
+                                 <template if:true={isNot2ndLookup}>
+                                    <div class="slds-text-align_center  slds-m-bottom_small">{selectedObject}.{selectedField}</div>
+                                          <div class="slds-text-align_center  slds-m-bottom_small">              {selectedField}</div>
+                                         <div class="slds-text-align_center slds-m-bottom_small">              {selectedField}</div>
+                                <div class="button-container slds-align_absolute-center slds-m-top_small">
+                                    <button class="slds-button slds-button_neutral" onclick={handleCancelField2} title="Cancel">Cancel</button>
+                                    <button class="slds-button slds-button_brand" onclick={handleAddField} title="Add">Add</button>
+                                </div>
+                                 </template>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="12" small-device-size="6" medium-device-size="4" large-device-size="3">
+                            <div class="custom-box slds-text-align_center">
+                                <template if:true={isNot3rdLookup}>
+                                    <div class="slds-text-align_center  slds-m-bottom_small">{selectedObject}.{selectedField}</div>
+                                    <div class="slds-text-align_center  slds-m-bottom_small">              {selectedField}</div>
+                                   <div class="slds-text-align_center slds-m-bottom_small">              {selectedField}</div>
+                                  
+                              <div class="button-container slds-align_absolute-center slds-m-top_small">
+                              <button class="slds-button slds-button_neutral" onclick={handleCancelField3} title="Cancel">Cancel</button>
+                              <button class="slds-button slds-button_brand" onclick={handleAddField} title="Add">Add</button>
+                              </div>
+                               </template>      
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+
+                    <p class="slds-theme_shade slds-text-body_small"> 3. SET THE BILLING RULES LOGICAL OPERATOR AND VALUES/VARIABLE</p>  
+                    
+                    <template lwc:if={showSelectedFormula}>
+                        <template if:true={isOppRule}>
+                            Opportunity Rule
+                            <div class="slds-scrollable slds-m-around_medium">
+                            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered slds-table_striped slds-max-medium-table_stacked-horizontal">  
+                                <tbody>       
+                                    <template for:each={OppRuleFieldList} for:item="fls" for:index="indx">
+                                        <tr key={fls.key} id={fls.key}> 
+                                            <td>
+                                                {fls.fieldName}                              
+                                            </td>
+                                            
+                                            <td>
+                                            <lightning-combobox
+                                            data-oppkey={indx}
+                                            class="mandatoryfield"
+                                            required=" true"
+                                            value={selectedOperatorValue}
+                                            placeholder="--None--"
+                                            options={fls.operator}
+                                            onchange={handleOppOperatorChange} >
+                                            </lightning-combobox>
+                                            </td>
+            
+                                            <template lwc:if={fls.fieldDTOther}>
+                                            <td>
+                                             <lightning-input class="mandatoryfield" data-opp={indx} type={otherfieldDataType}  value={inputFieldValue} required=" true" onblur={handleFormulaOppInput}></lightning-input>
+                                            </td>
+                                            </template>
+            
+                                            <template lwc:elseif={fls.fieldDTDate}>
+                                                <td>
+                                                 <lightning-input class="mandatoryfield" data-opp={indx} type="Date" value={inputFieldValue} required="true" onblur={handleFormulaOppInput}></lightning-input>
+                                                </td>
+                                            </template>
+            
+                                            <template lwc:elseif={fls.fieldDTDateTime}>
+                                                <td>
+                                                 <lightning-input class="mandatoryfield" data-opp={indx} type="DateTime" value={inputFieldValue} required="true" onblur={handleFormulaOppInput}></lightning-input>
+                                                </td>
+                                            </template>
+            
+                                            <template lwc:elseif={fls.fieldDTPicklist}>
+                                                <td>
+                                           <lightning-combobox
+                                            data-opp={indx}
+                                            class="mandatoryfield"
+                                            required="true"
+                                            disabled={disablePickOptions}
+                                            value={selectedPickValue}
+                                            placeholder="--None--"
+                                            options={pickValueOptions}
+                                            onchange={handleFormulaOppInput} >
+                                            </lightning-combobox>
+                                                   </td>
+                                            </template>
+            
+                                            <template lwc:elseif={fls.fieldDTBoolean}>
+                                                <td>
+                                                    <select data-opp={indx} class="slds-select slds-m-top_medium mandatoryfield" name = "optionSelect" onchange={handleFormulaOppInput} >
+                                                        <option value="true">True</option>
+                                                        <option value="false">False</option>
+                                                    </select> 
+                                                </td>
+                                                </template>
+            
+                                            <td>
+                                             <lightning-input class="slds-m-top_x-small slds-m-left_large" data-opp={indx} type="checkbox" label="Variable" onchange={handleOppInputVariable}></lightning-input>
+                                            </td>
+                                            
+                                            <td>
+                                                <lightning-button-icon icon-name="utility:delete"
+                                                                                          data-opp={indx}   
+                                                                                          variant="bare"    
+                                                                                          alternative-text="Delete"     
+                                                                                          class="slds-m-left_xx-small slds-m-top_small buttonIcon"
+                                                                                          onclick={removeOppRow} 
+                                                                                          title="Delete"></lightning-button-icon>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                     
+                                </tbody>
+                            </table>
+                           </div> 
+                        </template>
+                        <template if:true={isOppProductRule}>
+                             Opportunity Product Rule
+                             <div class="slds-scrollable slds-m-around_medium">
+                            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered slds-table_striped slds-max-medium-table_stacked-horizontal">  
+                                <tbody>       
+                                    <template for:each={OppProductRuleFieldList} for:item="fls" for:index="indx">
+                                        <tr key={fls.key} id={fls.key}> 
+                                            <td>
+                                                {fls.fieldName}                              
+                                            </td>
+                        
+                                            <td>
+                                            <lightning-combobox
+                                            data-prodkey={indx}
+                                            class="mandatoryfield oppProd"
+                                            required=" true"
+                                            value={selectedOperatorValue}
+                                            placeholder="--None--"
+                                            options={fls.operator}
+                                            onchange={handleProdOperatorChange} >
+                                            </lightning-combobox>
+                                            </td>
+            
+                                            <template lwc:if={fls.fieldDTOther}>
+                                            <td>
+                                             <lightning-input class="mandatoryfield" data-prod={indx} type={otherfieldDataType}  value={inputFieldValue} required=" true" onblur={handleFormulaOppProdInput}></lightning-input>
+                                            </td>
+                                            </template>
+            
+                                            <template lwc:elseif={fls.fieldDTDate}>
+                                                <td>
+                                                 <lightning-input class="mandatoryfield" data-prod={indx} type="Date" value={inputFieldValue} required="true" onblur={handleFormulaOppProdInput}></lightning-input>
+                                                </td>
+                                            </template>
+            
+                                            <template lwc:elseif={fls.fieldDTDateTime}>
+                                                <td>
+                                                 <lightning-input class="mandatoryfield" data-prod={indx} type="DateTime" value={inputFieldValue} required="true" onblur={handleFormulaOppProdInput}></lightning-input>
+                                                </td>
+                                            </template>
+            
+                                            <template lwc:elseif={fls.fieldDTPicklist}>
+                                                <td>
+                                           <lightning-combobox
+                                           data-prod={indx}
+                                            class="mandatoryfield"
+                                            required="true"
+                                            disabled={disablePickOptions}
+                                            value={selectedPickValue}
+                                            placeholder="--None--"
+                                            options={pickValueOptions}
+                                            onchange={handleFormulaOppProdInput} >
+                                            </lightning-combobox>
+                                                   </td>
+                                            </template>
+            
+                                            <template lwc:elseif={fls.fieldDTBoolean}>
+                                                <td>
+                                                    <select data-prod={indx} class="slds-select slds-m-top_medium mandatoryfield" name = "optionSelect" onchange={handleFormulaOppProdInput} >
+                                                        <option value="true">True</option>
+                                                        <option value="false">False</option>
+                                                    </select> 
+                                                </td>
+                                                </template>
+            
+                                            <td>
+                                             <lightning-input class="slds-m-top_x-small slds-m-left_large" data-prod={indx} type="checkbox" label="Variable" onchange={handleOppProdInputVariable}></lightning-input>
+                                            </td>
+                                            
+                                            <td>
+                                                <lightning-button-icon icon-name="utility:delete"
+                                                                                          data-prod={indx}   
+                                                                                          variant="bare"    
+                                                                                          alternative-text="Delete"     
+                                                                                          class="slds-m-left_xx-small slds-m-top_small buttonIcon"
+                                                                                          onclick={removeOppProdRow} 
+                                                                                          title="Delete"></lightning-button-icon>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                     
+                                </tbody>
+                            </table>
+                        </div>
+                        </template>
+                     </template>
+                     <!--3rd Show Formula Section End-->
+
+                      </template> 
+                  </div>
+                  
+                    <footer class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Cancel</button>
+                        <button class="slds-button slds-button_brand" onclick={handleValidation} title="Save">Save</button>
+                    </footer>
+               </div>
+             </section>
+             <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    
+    </template>

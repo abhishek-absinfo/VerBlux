@@ -1,0 +1,61 @@
+.slds-modal__container{ 
+    max-width: 80rem !important;
+    width: 80% !important;
+    height : auto;
+  } 
+ 
+  .slds-modal__content{ 
+    height : 55vh !important; 
+    max-height: 55vh !important; 
+  } 
+
+.textButton { 
+    background:none; 
+    border:none;
+ }
+
+ .button-container{
+    display: flex;
+    width:10px;
+ }
+ .button:hover {background-color: #3e8e41}
+
+ .buttonIcon{
+  --slds-c-button-radius-border: none;
+  --slds-c-button-sizing-border : 0;
+ }
+
+.thead {
+  background-color: #3f87a6;
+  color: #fff;
+}
+
+.table {
+  border-collapse: collapse;
+  border: 2px solid rgb(200, 200, 200);
+  letter-spacing: 1px;
+  font-family: sans-serif;
+  font-size: 0.8rem;
+}
+.spinnerHolder {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+
+.tableScroll {
+  overflow: auto;
+  overflow-y: hidden;
+  height: 100%;
+}
+
+.exampleHolder{
+  position: absolute;
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+
+.slds-dropdown-trigger.slds-is-open .slds-listbox__option.slds-has-focus {
+  background-color: rgb(0, 200, 255);
+}
